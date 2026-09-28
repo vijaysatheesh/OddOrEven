@@ -1,6 +1,6 @@
 CC ?= riscv64-linux-gnu-gcc
 CFLAGS = -Wall -g
-LDFLAGS =
+LDFLAGS ?=
 
 TARGET = ledblink
 OBJS = main.o
