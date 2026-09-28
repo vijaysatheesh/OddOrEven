@@ -7,8 +7,15 @@
 void set_led_byte(char byte);
 int mem_usage();
 
+char log = 0;
+
 int main(int argc, char const *argv[])
 {
+    if (argc > 1)
+    {
+        log = 1;
+    }
+    
     char byte = 0b10000000;
     while(1){
         mem_usage();
@@ -55,9 +62,11 @@ int mem_usage() {
             byte = (byte<<1) | 0x1;
         }
         set_led_byte(byte);
-        printf("%f\nUsed System RAM:  %lld MB\n",percentage_8, used_ram / (1024 * 1024));
-        read_led_byte(&byte);
-        printf("Readback: %d\n",byte);
+        if (log)
+        {
+            printf("%f\nUsed System RAM:  %lld MB\n",percentage_8, used_ram / (1024 * 1024));
+        }
+        
     } else {
         perror("sysinfo error");
         return 1;
