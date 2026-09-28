@@ -1,4 +1,4 @@
-CC = riscv64-linux-gnu-gcc
+CC ?= riscv64-linux-gnu-gcc
 CFLAGS = -Wall -g
 LDFLAGS =
 
