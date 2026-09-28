@@ -1,10 +1,12 @@
-CC ?= riscv64-linux-gnu-gcc-13
-CFLAGS ?= -Wall -g
-LDFLAGS ?=
+CC = riscv64-linux-gnu-gcc
+CFLAGS = -Wall -g
+LDFLAGS =
 
-TARGET = helloworld
+TARGET = ledblink
 OBJS = main.o
 
+USERNAME = root
+TARGET_IP = 10.42.0.104
 all: $(TARGET)
 
 $(TARGET): $(OBJS)
@@ -16,6 +18,9 @@ $(TARGET): $(OBJS)
 install:
 	install -d $(DESTDIR)$(bindir)
 	install -m 0755 $(TARGET) $(DESTDIR)$(bindir)
+
+scp:
+	scp $(TARGET) $(USERNAME)@$(TARGET_IP):/$(USERNAME)/exec/
 
 clean:
 	rm -f $(TARGET) $(OBJS)
